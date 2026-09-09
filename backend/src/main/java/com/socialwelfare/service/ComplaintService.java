@@ -15,20 +15,19 @@ public class ComplaintService {
     private final ComplaintRepository complaintRepository;
     private final GeocodingService geocodingService;
     private final DepartmentDetectionService departmentDetectionService;
-    private final FileStorageService fileStorageService;
+    private final CloudinaryService cloudinaryService;
 
     public ComplaintService(
             ComplaintRepository complaintRepository,
             GeocodingService geocodingService,
             DepartmentDetectionService departmentDetectionService,
-            FileStorageService fileStorageService) {
+            CloudinaryService cloudinaryService) {
 
         this.complaintRepository = complaintRepository;
         this.geocodingService = geocodingService;
         this.departmentDetectionService = departmentDetectionService;
-        this.fileStorageService = fileStorageService;
+        this.cloudinaryService = cloudinaryService;
     }
-
 
     // =========================================================
     // CREATE COMPLAINT
@@ -48,7 +47,6 @@ public class ComplaintService {
             complaint.setAddress(address);
         }
 
-
         // Detect department from description
         if (complaint.getDescription() != null
                 && !complaint.getDescription().isBlank()) {
@@ -65,18 +63,11 @@ public class ComplaintService {
             complaint.setDepartment(null);
         }
 
-
-        // New complaint always starts as PENDING
         complaint.setStatus("PENDING");
-
-
-        // No resolved image when complaint is created
         complaint.setResolvedImagePath(null);
-
 
         return complaintRepository.save(complaint);
     }
-
 
     // =========================================================
     // GET ALL COMPLAINTS
@@ -87,9 +78,8 @@ public class ComplaintService {
         return complaintRepository.findAll();
     }
 
-
     // =========================================================
-    // GET DEPARTMENT COMPLAINTS
+    // GET COMPLAINTS BY DEPARTMENT
     // =========================================================
 
     public List<Complaint> getComplaintsByDepartment(
@@ -98,9 +88,8 @@ public class ComplaintService {
         return complaintRepository.findByDepartment(department);
     }
 
-
     // =========================================================
-    // GET USER COMPLAINTS
+    // GET COMPLAINTS BY USER
     // =========================================================
 
     public List<Complaint> getComplaintsByUser(Long userId) {
@@ -108,9 +97,8 @@ public class ComplaintService {
         return complaintRepository.findByUserId(userId);
     }
 
-
     // =========================================================
-    // NORMAL STATUS UPDATE
+    // UPDATE STATUS
     // =========================================================
 
     public Complaint updateComplaintStatus(
@@ -121,16 +109,17 @@ public class ComplaintService {
                 complaintRepository.findById(complaintId)
                         .orElseThrow(() ->
                                 new RuntimeException(
-                                        "Complaint not found"));
+                                        "Complaint not found"
+                                )
+                        );
 
         complaint.setStatus(status.toUpperCase());
 
         return complaintRepository.save(complaint);
     }
 
-
     // =========================================================
-    // COMPLETE COMPLAINT WITH RESOLVED IMAGE
+    // COMPLETE COMPLAINT + RESOLVED IMAGE
     // =========================================================
 
     public Complaint completeComplaint(
@@ -141,31 +130,28 @@ public class ComplaintService {
                 complaintRepository.findById(complaintId)
                         .orElseThrow(() ->
                                 new RuntimeException(
-                                        "Complaint not found"));
+                                        "Complaint not found"
+                                )
+                        );
 
-
-        // Resolved image is compulsory
         if (resolvedImage == null
                 || resolvedImage.isEmpty()) {
 
             throw new RuntimeException(
-                    "Resolved image is required");
+                    "Resolved image is required"
+            );
         }
 
+        // Upload resolved image to Cloudinary
+        String resolvedImageUrl =
+                cloudinaryService.uploadImage(resolvedImage);
 
-        // Save resolved image
-        String resolvedImagePath =
-                fileStorageService.saveFile(resolvedImage);
-
-
-        // Store image path
+        // Save Cloudinary URL in database
         complaint.setResolvedImagePath(
-                resolvedImagePath);
+                resolvedImageUrl
+        );
 
-
-        // Mark complaint completed
         complaint.setStatus("COMPLETED");
-
 
         return complaintRepository.save(complaint);
     }
