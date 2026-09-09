@@ -43,7 +43,7 @@ export class AdminDashboard implements OnInit {
   loadComplaints(): void {
 
     console.log(
-      'CALLING: http://localhost:8080/api/complaints'
+      'CALLING: https://social-wel.onrender.com/api/complaints
     );
 
 
