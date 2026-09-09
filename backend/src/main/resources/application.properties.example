@@ -10,3 +10,7 @@ spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 
 gemini.api.key=YOUR_GEMINI_API_KEY
+
+# Cloudinary
+cloudinary.cloud-name=zmjmvoey
+cloudinary.upload-preset=social_welfare_upload
