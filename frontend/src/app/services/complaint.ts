@@ -17,8 +17,8 @@ export class ComplaintService {
     inject(HttpClient);
 
 
-  private api =
-    'http://localhost:8080/api/complaints';
+
+  private api = 'https://social-wel.onrender.com/api/complaints';
 
 
   // ==========================================
