@@ -8,7 +8,7 @@ export class UserService {
 
   private http = inject(HttpClient);
 
-  private api = 'http://localhost:8080/api/users';
+  private api = 'https://social-wel.onrender.com/api/users';
 
   register(user: any) {
     return this.http.post(`${this.api}/register`, user);
