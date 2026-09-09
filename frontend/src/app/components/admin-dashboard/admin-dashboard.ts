@@ -40,73 +40,64 @@ export class AdminDashboard implements OnInit {
   }
 
 
-  loadComplaints(): void {
+ loadComplaints(): void {
 
-    console.log(
-      'CALLING: https://social-wel.onrender.com/api/complaints
-    );
+  console.log(
+    'CALLING: https://social-wel.onrender.com/api/complaints'
+  );
 
+  this.complaintService.getAllComplaints().subscribe({
 
-    this.complaintService.getAllComplaints().subscribe({
+    next: (response: any) => {
 
-      next: (response: any) => {
+      console.log(
+        'ADMIN API RESPONSE:',
+        response
+      );
 
-        console.log(
-          'ADMIN API RESPONSE:',
+      if (Array.isArray(response)) {
+
+        this.complaints = response;
+
+      } else {
+
+        console.error(
+          'INVALID API RESPONSE:',
           response
         );
 
-
-        if (Array.isArray(response)) {
-
-          this.complaints = response;
-
-        } else {
-
-          console.error(
-            'INVALID API RESPONSE:',
-            response
-          );
-
-          this.complaints = [];
-
-        }
-
-
-        this.calculateCounts();
-
-
-        console.log(
-          'COMPLAINTS STORED:',
-          this.complaints
-        );
-
-        console.log(
-          'TOTAL:',
-          this.totalComplaints
-        );
-
-
-        // IMPORTANT
-        // Force Angular to update the HTML
-
-        this.cdr.detectChanges();
-
-      },
-
-
-      error: (error) => {
-
-        console.error(
-          'ADMIN API ERROR:',
-          error
-        );
+        this.complaints = [];
 
       }
 
-    });
+      this.calculateCounts();
 
-  }
+      console.log(
+        'COMPLAINTS STORED:',
+        this.complaints
+      );
+
+      console.log(
+        'TOTAL:',
+        this.totalComplaints
+      );
+
+      this.cdr.detectChanges();
+
+    },
+
+    error: (error) => {
+
+      console.error(
+        'ADMIN API ERROR:',
+        error
+      );
+
+    }
+
+  });
+
+}
 
 
   calculateCounts(): void {
