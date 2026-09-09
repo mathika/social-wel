@@ -9,7 +9,6 @@
         <span>{{ complaints.length }}</span>
     </p>
 
-
     <!-- COMPLAINT TABLE -->
     <table *ngIf="complaints.length > 0">
 
@@ -25,7 +24,6 @@
             </tr>
         </thead>
 
-
         <tbody>
 
             <tr *ngFor="let complaint of complaints">
@@ -35,22 +33,18 @@
                     {{ complaint.id }}
                 </td>
 
-
                 <!-- DESCRIPTION -->
                 <td>
                     {{ complaint.description || 'No description' }}
                 </td>
-
 
                 <!-- DEPARTMENT -->
                 <td>
                     {{ complaint.department || 'Pending Assignment' }}
                 </td>
 
-
                 <!-- STATUS -->
                 <td>
-
                     <span
                         [ngClass]="{
                             'pending': complaint.status === 'PENDING',
@@ -62,15 +56,12 @@
                         {{ complaint.status }}
 
                     </span>
-
                 </td>
-
 
                 <!-- ADDRESS -->
                 <td>
                     {{ complaint.address || 'Address not available' }}
                 </td>
-
 
                 <!-- ORIGINAL COMPLAINT IMAGE -->
                 <td>
@@ -80,10 +71,7 @@
                         *ngIf="complaint.imagePath; else noComplaintImage">
 
                         <img
-                            [src]="
-                                https://social-wel.onrender.com/api/complaints/image/
-                                + complaint.imagePath
-                            "
+                            [src]="'https://social-wel.onrender.com/api/complaints/image/' + complaint.imagePath"
                             alt="Complaint Image"
                             class="complaint-image"
                         >
@@ -100,22 +88,15 @@
 
                 </td>
 
-
                 <!-- RESOLVED IMAGE -->
                 <td>
 
                     <div
                         class="image-container"
-                        *ngIf="
-                            complaint.resolvedImagePath;
-                            else noResolvedImage
-                        ">
+                        *ngIf="complaint.resolvedImagePath; else noResolvedImage">
 
                         <img
-                            [src]="
-                                'http://localhost:8080/api/complaints/image/'
-                                + complaint.resolvedImagePath
-                            "
+                            [src]="'https://social-wel.onrender.com/api/complaints/image/' + complaint.resolvedImagePath"
                             alt="Resolved Image"
                             class="complaint-image"
                         >
@@ -137,7 +118,6 @@
         </tbody>
 
     </table>
-
 
     <!-- NO COMPLAINTS -->
     <div
