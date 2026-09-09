@@ -1,0 +1,96 @@
+<div class="admin-container">
+
+  <h1>ADMIN DASHBOARD</h1>
+
+  <p class="subtitle">Complaint Monitoring System</p>
+
+  <div class="summary-container">
+
+    <div class="summary-card">
+      <h3>Total Complaints</h3>
+      <h2>{{ complaints.length }}</h2>
+    </div>
+
+    <div class="summary-card">
+      <h3>Pending</h3>
+      <h2>{{ pendingComplaints }}</h2>
+    </div>
+
+    <div class="summary-card">
+      <h3>In Progress</h3>
+      <h2>{{ inProgressComplaints }}</h2>
+    </div>
+
+    <div class="summary-card">
+      <h3>Completed</h3>
+      <h2>{{ completedComplaints }}</h2>
+    </div>
+
+  </div>
+
+
+  <div class="table-card">
+
+    <h2>All Complaints</h2>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Address</th>
+            <th>Department</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <ng-container *ngFor="let complaint of complaints">
+
+            <tr>
+
+              <td>{{ complaint.id }}</td>
+
+              <td>{{ complaint.userId }}</td>
+
+              <td>
+
+                <img
+                  *ngIf="complaint.imagePath"
+                  [src]="'http://localhost:8080/uploads/' + complaint.imagePath"
+                  width="100"
+                  height="80"
+                  alt="Complaint Image"
+                >
+
+              </td>
+
+              <td>{{ complaint.description }}</td>
+
+              <td>{{ complaint.address }}</td>
+
+              <td>{{ complaint.department }}</td>
+
+              <td>
+                {{ complaint.status }}
+              </td>
+
+            </tr>
+
+          </ng-container>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

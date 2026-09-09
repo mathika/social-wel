@@ -1,0 +1,151 @@
+<div class="container">
+
+    <!-- PAGE TITLE -->
+    <h1>📋 My Complaints</h1>
+
+    <!-- TOTAL COUNT -->
+    <p class="count">
+        Total Complaints :
+        <span>{{ complaints.length }}</span>
+    </p>
+
+
+    <!-- COMPLAINT TABLE -->
+    <table *ngIf="complaints.length > 0">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Department</th>
+                <th>Status</th>
+                <th>Address</th>
+                <th>Complaint Image</th>
+                <th>Resolved Image</th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+
+            <tr *ngFor="let complaint of complaints">
+
+                <!-- ID -->
+                <td>
+                    {{ complaint.id }}
+                </td>
+
+
+                <!-- DESCRIPTION -->
+                <td>
+                    {{ complaint.description || 'No description' }}
+                </td>
+
+
+                <!-- DEPARTMENT -->
+                <td>
+                    {{ complaint.department || 'Pending Assignment' }}
+                </td>
+
+
+                <!-- STATUS -->
+                <td>
+
+                    <span
+                        [ngClass]="{
+                            'pending': complaint.status === 'PENDING',
+                            'progress': complaint.status === 'IN_PROGRESS',
+                            'resolved': complaint.status === 'RESOLVED',
+                            'completed': complaint.status === 'COMPLETED'
+                        }">
+
+                        {{ complaint.status }}
+
+                    </span>
+
+                </td>
+
+
+                <!-- ADDRESS -->
+                <td>
+                    {{ complaint.address || 'Address not available' }}
+                </td>
+
+
+                <!-- ORIGINAL COMPLAINT IMAGE -->
+                <td>
+
+                    <div
+                        class="image-container"
+                        *ngIf="complaint.imagePath; else noComplaintImage">
+
+                        <img
+                            [src]="
+                                'http://localhost:8080/api/complaints/image/'
+                                + complaint.imagePath
+                            "
+                            alt="Complaint Image"
+                            class="complaint-image"
+                        >
+
+                    </div>
+
+                    <ng-template #noComplaintImage>
+
+                        <span class="no-image">
+                            No Image
+                        </span>
+
+                    </ng-template>
+
+                </td>
+
+
+                <!-- RESOLVED IMAGE -->
+                <td>
+
+                    <div
+                        class="image-container"
+                        *ngIf="
+                            complaint.resolvedImagePath;
+                            else noResolvedImage
+                        ">
+
+                        <img
+                            [src]="
+                                'http://localhost:8080/api/complaints/image/'
+                                + complaint.resolvedImagePath
+                            "
+                            alt="Resolved Image"
+                            class="complaint-image"
+                        >
+
+                    </div>
+
+                    <ng-template #noResolvedImage>
+
+                        <span class="no-image">
+                            Not Resolved Yet
+                        </span>
+
+                    </ng-template>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+    <!-- NO COMPLAINTS -->
+    <div
+        class="empty"
+        *ngIf="complaints.length === 0">
+
+        <h2>No Complaints Found 😔</h2>
+
+    </div>
+
+</div>

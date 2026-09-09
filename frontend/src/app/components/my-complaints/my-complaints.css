@@ -1,0 +1,769 @@
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: linear-gradient(
+        -45deg,
+        #eef2f7,
+        #dbeafe,
+        #f3e8ff,
+        #e0f2fe
+    );
+
+    background-size: 400% 400%;
+
+    animation: backgroundMove 12s ease infinite;
+}
+
+
+/* Animated background */
+
+@keyframes backgroundMove {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.container {
+
+    width: 95%;
+    max-width: 1200px;
+
+    margin: 40px auto;
+
+    padding: 30px;
+
+    background: rgba(255,255,255,0.96);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.15);
+
+    animation:
+        containerOpen 1s cubic-bezier(.17,.67,.35,1.25);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* Container enters dramatically */
+
+@keyframes containerOpen {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateY(80px)
+            scale(0.92);
+    }
+
+    70% {
+        transform:
+            translateY(-8px)
+            scale(1.02);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   CONTAINER SHINE
+===================================================== */
+
+.container::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 50%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.5),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    animation: shine 4s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+
+@keyframes shine {
+
+    0% {
+        left: -100%;
+    }
+
+    45% {
+        left: 130%;
+    }
+
+    100% {
+        left: 130%;
+    }
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+h1 {
+
+    text-align: center;
+
+    color: #0d6efd;
+
+    margin-bottom: 10px;
+
+    font-size: 38px;
+
+    animation:
+        titleAnimation 1s ease-out;
+
+    position: relative;
+}
+
+
+/* Title slides from left + bounce */
+
+@keyframes titleAnimation {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateX(-100px)
+            scale(0.7);
+    }
+
+    70% {
+        transform:
+            translateX(10px)
+            scale(1.08);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translateX(0)
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   COUNT
+===================================================== */
+
+.count {
+
+    text-align: right;
+
+    font-size: 18px;
+
+    margin-bottom: 20px;
+
+    animation:
+        countSlide 1s ease-out 0.3s both;
+}
+
+
+@keyframes countSlide {
+
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+.count span {
+
+    display: inline-block;
+
+    color: #dc3545;
+
+    font-weight: bold;
+
+    font-size: 22px;
+
+    animation:
+        numberBounce 1s ease 0.8s both;
+}
+
+
+@keyframes numberBounce {
+
+    0% {
+        transform: scale(0);
+    }
+
+    60% {
+        transform: scale(1.4);
+    }
+
+    80% {
+        transform: scale(0.85);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+table {
+
+    width: 100%;
+
+    border-collapse: separate;
+
+    border-spacing: 0;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    animation:
+        tableAppear 1s ease-out 0.4s both;
+
+    position: relative;
+}
+
+
+@keyframes tableAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(50px)
+            scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+thead {
+
+    color: white;
+
+    background:
+        linear-gradient(
+            270deg,
+            #0d6efd,
+            #6610f2,
+            #0dcaf0,
+            #6610f2,
+            #0d6efd
+        );
+
+    background-size: 400% 100%;
+
+    animation:
+        headerMove 6s linear infinite;
+}
+
+
+@keyframes headerMove {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 400% 50%;
+    }
+}
+
+
+th {
+
+    padding: 15px;
+
+    font-size: 17px;
+
+    border: 1px solid rgba(255,255,255,0.4);
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+
+th:hover {
+
+    transform: translateY(-4px);
+
+    background: rgba(255,255,255,0.15);
+}
+
+
+/* =====================================================
+   TABLE CELLS
+===================================================== */
+
+td {
+
+    padding: 14px;
+
+    text-align: center;
+
+    border: 1px solid #dcdcdc;
+
+    transition:
+        background 0.3s ease;
+}
+
+
+/* =====================================================
+   ROW ANIMATION
+===================================================== */
+
+tbody tr {
+
+    opacity: 0;
+
+    animation:
+        complaintAppear
+        0.8s
+        cubic-bezier(.17,.67,.35,1.2)
+        forwards;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        background 0.35s ease;
+}
+
+
+/* Each row appears separately */
+
+tbody tr:nth-child(1) {
+    animation-delay: 0.8s;
+}
+
+tbody tr:nth-child(2) {
+    animation-delay: 1.0s;
+}
+
+tbody tr:nth-child(3) {
+    animation-delay: 1.2s;
+}
+
+tbody tr:nth-child(4) {
+    animation-delay: 1.4s;
+}
+
+tbody tr:nth-child(5) {
+    animation-delay: 1.6s;
+}
+
+tbody tr:nth-child(6) {
+    animation-delay: 1.8s;
+}
+
+tbody tr:nth-child(7) {
+    animation-delay: 2.0s;
+}
+
+tbody tr:nth-child(8) {
+    animation-delay: 2.2s;
+}
+
+tbody tr:nth-child(9) {
+    animation-delay: 2.4s;
+}
+
+
+@keyframes complaintAppear {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateX(-80px)
+            scale(0.95);
+    }
+
+    60% {
+
+        opacity: 1;
+
+        transform:
+            translateX(12px)
+            scale(1.01);
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            translateX(0)
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   ALTERNATE ROWS
+===================================================== */
+
+tbody tr:nth-child(even) {
+
+    background: #f8f9fa;
+}
+
+
+/* =====================================================
+   ROW HOVER
+===================================================== */
+
+tbody tr:hover {
+
+    background: #dbeafe;
+
+    transform:
+        translateX(8px)
+        scale(1.01);
+
+    box-shadow:
+        0 8px 20px rgba(13,110,253,0.15);
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =====================================================
+   STATUS BADGES
+===================================================== */
+
+.pending,
+.progress,
+.resolved,
+.completed {
+
+    display: inline-block;
+
+    padding: 8px 16px;
+
+    border-radius: 25px;
+
+    font-weight: bold;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* =====================================================
+   PENDING
+===================================================== */
+
+.pending {
+
+    background: #ffc107;
+
+    color: #000;
+
+    animation:
+        pendingGlow 1.8s ease-in-out infinite;
+}
+
+
+@keyframes pendingGlow {
+
+    0% {
+
+        transform: scale(1);
+
+        box-shadow:
+            0 0 0 0 rgba(255,193,7,0.7);
+    }
+
+    50% {
+
+        transform: scale(1.08);
+
+        box-shadow:
+            0 0 18px 5px rgba(255,193,7,0.35);
+    }
+
+    100% {
+
+        transform: scale(1);
+
+        box-shadow:
+            0 0 0 0 rgba(255,193,7,0);
+    }
+}
+
+
+/* =====================================================
+   IN PROGRESS
+===================================================== */
+
+.progress {
+
+    background: #0dcaf0;
+
+    color: white;
+
+    animation:
+        progressGlow 1.8s ease-in-out infinite;
+}
+
+
+@keyframes progressGlow {
+
+    0% {
+        box-shadow:
+            0 0 0 0 rgba(13,202,240,0.6);
+    }
+
+    50% {
+        box-shadow:
+            0 0 20px 6px rgba(13,202,240,0.3);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(13,202,240,0);
+    }
+}
+
+
+/* =====================================================
+   COMPLETED
+===================================================== */
+
+.completed,
+.resolved {
+
+    background: #198754;
+
+    color: white;
+}
+
+
+/* =====================================================
+   STATUS HOVER
+===================================================== */
+
+.pending:hover,
+.progress:hover,
+.completed:hover,
+.resolved:hover {
+
+    transform: scale(1.15);
+
+    box-shadow:
+        0 6px 15px rgba(0,0,0,0.2);
+}
+
+
+/* =====================================================
+   IMAGES
+===================================================== */
+
+.complaint-image,
+.resolved-image {
+
+    width: 100px;
+
+    height: 80px;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+    border: 2px solid #e2e8f0;
+
+    transition:
+        transform 0.4s cubic-bezier(.17,.67,.35,1.4),
+        box-shadow 0.4s ease;
+}
+
+
+/* Image hover */
+
+.complaint-image:hover,
+.resolved-image:hover {
+
+    transform:
+        scale(1.2)
+        rotate(2deg);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.25);
+
+    position: relative;
+
+    z-index: 10;
+}
+
+
+/* =====================================================
+   NO IMAGE
+===================================================== */
+
+.no-image {
+
+    color: #94a3b8;
+
+    font-size: 13px;
+
+    font-style: italic;
+
+    animation:
+        textFade 1s ease;
+}
+
+
+@keyframes textFade {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty {
+
+    text-align: center;
+
+    margin-top: 40px;
+
+    color: #dc3545;
+
+    animation:
+        emptyAnimation 0.8s ease;
+}
+
+
+@keyframes emptyAnimation {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.5)
+            rotate(-5deg);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .container {
+
+        width: 90%;
+
+        padding: 20px;
+
+        margin: 20px auto;
+    }
+
+    h1 {
+
+        font-size: 28px;
+    }
+
+    .count {
+
+        text-align: left;
+    }
+
+    table {
+
+        min-width: 900px;
+    }
+}
+.complaint-image {
+    width: 100px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}

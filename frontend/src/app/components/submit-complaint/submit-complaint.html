@@ -1,0 +1,47 @@
+<div class="container mt-5">
+
+  <h2>Submit Complaint</h2>
+
+  <br>
+
+  <textarea
+    class="form-control"
+    rows="5"
+    placeholder="Describe your complaint"
+    [(ngModel)]="description">
+  </textarea>
+
+  <br>
+
+  <input
+    type="file"
+    class="form-control"
+    (change)="onFileSelected($event)">
+
+  <br>
+
+  <button
+    class="btn btn-warning"
+    (click)="getLocation()">
+
+    📍 Get Current Location
+
+  </button>
+
+  <br><br>
+
+  <p><b>Latitude :</b> {{latitude}}</p>
+
+  <p><b>Longitude :</b> {{longitude}}</p>
+
+  <br>
+
+  <button
+    class="btn btn-primary"
+    (click)="submitComplaint()">
+
+    Submit Complaint
+
+  </button>
+
+</div>

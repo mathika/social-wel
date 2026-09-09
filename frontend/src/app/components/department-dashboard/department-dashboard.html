@@ -1,0 +1,198 @@
+<div class="container">
+
+  <div class="card">
+
+    <!-- HEADER -->
+    <h2>
+      {{ department }} Department
+    </h2>
+
+    <p class="total">
+      Total Complaints:
+      <span>{{ complaints.length }}</span>
+    </p>
+
+    <!-- NO COMPLAINTS -->
+    <div
+      *ngIf="complaints.length === 0"
+      class="no-data"
+    >
+      No complaints found.
+    </div>
+
+    <!-- COMPLAINT TABLE -->
+    <div
+      *ngIf="complaints.length > 0"
+      class="table-wrapper"
+    >
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Complaint Image</th>
+            <th>Description</th>
+            <th>Address</th>
+            <th>Department</th>
+            <th>Status</th>
+            <th>Resolved Image</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr
+            *ngFor="let complaint of complaints"
+            class="complaint-row"
+          >
+
+            <!-- ID -->
+            <td>
+              <span class="id-badge">
+                {{ complaint.id }}
+              </span>
+            </td>
+
+            <!-- ORIGINAL IMAGE -->
+            <td class="image-cell">
+
+              <div class="image-container">
+
+                <img
+                  *ngIf="complaint.imagePath"
+                  [src]="'http://localhost:8080/uploads/' + complaint.imagePath"
+                  class="complaint-image"
+                  alt="Complaint Image"
+                >
+
+                <span
+                  *ngIf="!complaint.imagePath"
+                  class="no-image"
+                >
+                  No Image
+                </span>
+
+              </div>
+
+            </td>
+
+            <!-- DESCRIPTION -->
+            <td class="description-cell">
+
+              <span class="description-text">
+                {{
+                  complaint.description ||
+                  'No description'
+                }}
+              </span>
+
+            </td>
+
+            <!-- ADDRESS -->
+            <td class="address-cell">
+
+              {{
+                complaint.address ||
+                'Address not available'
+              }}
+
+            </td>
+
+            <!-- DEPARTMENT -->
+            <td>
+
+              <span class="department-tag">
+                {{ complaint.department }}
+              </span>
+
+            </td>
+
+            <!-- STATUS -->
+            <td class="status-cell">
+
+              <select
+                [(ngModel)]="complaint.status"
+                (change)="updateStatus(
+                  complaint.id,
+                  complaint.status
+                )"
+                class="status-select"
+              >
+
+                <option value="PENDING">
+                  PENDING
+                </option>
+
+                <option value="IN_PROGRESS">
+                  IN PROGRESS
+                </option>
+
+                <option value="COMPLETED">
+                  COMPLETED
+                </option>
+
+              </select>
+
+            </td>
+
+            <!-- RESOLVED IMAGE -->
+            <td class="resolved-image-cell">
+
+              <!-- Upload when IN_PROGRESS -->
+              <div
+                *ngIf="complaint.status === 'IN_PROGRESS'"
+                class="complete-section"
+              >
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  #resolvedFile
+                >
+
+                <button
+                  type="button"
+                  class="complete-button"
+                  (click)="completeComplaint(
+                    complaint.id,
+                    resolvedFile.files
+                  )"
+                >
+                  Upload & Complete
+                </button>
+
+              </div>
+
+              <!-- Resolved Image -->
+              <img
+                *ngIf="complaint.resolvedImagePath"
+                [src]="'http://localhost:8080/uploads/' + complaint.resolvedImagePath"
+                class="resolved-image"
+                alt="Resolved Complaint"
+              >
+
+              <!-- No resolved image -->
+              <span
+                *ngIf="
+                  complaint.status === 'COMPLETED' &&
+                  !complaint.resolvedImagePath
+                "
+                class="no-resolved-image"
+              >
+                No resolved image
+              </span>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

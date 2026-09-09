@@ -1,0 +1,153 @@
+<div class="container mt-5">
+
+  <div class="card shadow p-4 mx-auto" style="max-width:450px;">
+
+    <h2 class="text-center mb-4">Create Account</h2>
+
+    <!-- ROLE -->
+    <div class="mb-3">
+
+      <label class="form-label">Account Role</label>
+
+      <select
+        class="form-select"
+        [(ngModel)]="role"
+        (change)="roleChanged()">
+
+        <option value="USER">User</option>
+
+        <option value="ADMIN">Admin</option>
+
+        <option value="WATER">Water Department</option>
+
+        <option value="DRAINAGE">Drainage Department</option>
+
+        <option value="GARBAGE">Garbage Department</option>
+
+        <option value="STREETLIGHT_ROAD">
+          Streetlight & Road
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- PROTECTED ROLE PASSWORD -->
+
+    @if (role !== 'USER' && !accessVerified) {
+
+      <div class="alert alert-warning">
+
+        <strong>Protected Role</strong>
+
+        <p class="mb-2 mt-2">
+          Enter the common access password to create
+          this account.
+        </p>
+
+        <input
+          type="password"
+          class="form-control mb-2"
+          [(ngModel)]="departmentAccessPassword"
+          placeholder="Enter access password">
+
+        <button
+          type="button"
+          class="btn btn-primary w-100"
+          (click)="verifyRoleAccess()">
+
+          Verify Access
+
+        </button>
+
+      </div>
+
+    }
+
+
+    <!-- ACCESS VERIFIED -->
+
+    @if (role !== 'USER' && accessVerified) {
+
+      <div class="alert alert-success">
+
+        ✓ Access verified
+
+      </div>
+
+    }
+
+
+    <!-- REGISTRATION FORM -->
+
+    @if (role === 'USER' || accessVerified) {
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Name
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="name"
+          placeholder="Enter your name">
+
+      </div>
+
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Password
+        </label>
+
+        <input
+          type="password"
+          class="form-control"
+          [(ngModel)]="password"
+          placeholder="Enter password">
+
+      </div>
+
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Phone Number
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="phone"
+          placeholder="Enter phone number">
+
+      </div>
+
+
+      <button
+        type="button"
+        class="btn btn-success w-100"
+        (click)="register()">
+
+        Create Account
+
+      </button>
+
+    }
+
+
+    <div class="text-center mt-3">
+
+      <a routerLink="/">
+        Back to Login
+      </a>
+
+    </div>
+
+  </div>
+
+</div>

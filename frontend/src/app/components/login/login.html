@@ -1,0 +1,44 @@
+<div class="container mt-5">
+
+  <div class="card p-4 mx-auto" style="max-width:400px;">
+
+    <h2 class="text-center mb-4">Social Welfare Login</h2>
+
+    <div class="mb-3">
+
+      <label class="form-label">Username</label>
+
+      <input
+        class="form-control"
+        [(ngModel)]="name">
+
+    </div>
+
+    <div class="mb-3">
+
+      <label class="form-label">Password</label>
+
+      <input
+        type="password"
+        class="form-control"
+        [(ngModel)]="password">
+
+    </div>
+
+    <button
+      class="btn btn-primary w-100"
+      (click)="login()">
+
+      Login
+
+    </button>
+
+    <br><br>
+
+    <a routerLink="/register">
+      Create New Account
+    </a>
+
+  </div>
+
+</div>

@@ -1,0 +1,277 @@
+<div class="awareness-page">
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <button class="back-btn" (click)="goBack()">
+      ← Back to Dashboard
+    </button>
+
+    <div class="hero-content">
+
+      <div class="earth-icon">
+        🌍
+      </div>
+
+      <h1>
+        Community Awareness
+      </h1>
+
+      <p>
+        Together we can build a cleaner,
+        safer and healthier community.
+      </p>
+
+      <div class="hero-line"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- INTRO -->
+  <section class="intro">
+
+    <div class="intro-icon">
+      🤝
+    </div>
+
+    <h2>
+      Small Actions Create Big Changes
+    </h2>
+
+    <p>
+      A healthy community depends on everyone
+      doing their part. Learn simple ways to
+      protect our environment, keep public
+      spaces clean and report civic problems.
+    </p>
+
+  </section>
+
+
+  <!-- TOPICS -->
+  <section class="topics-section">
+
+    <h2>
+      Explore Awareness Topics
+    </h2>
+
+    <p class="section-description">
+      Click on any topic to learn more.
+    </p>
+
+
+    <div class="topics-grid">
+
+      <div
+        class="topic-card"
+        *ngFor="let topic of topics; let i = index"
+        [class.active]="selectedTopic === i"
+        (click)="toggleTopic(i)"
+      >
+
+        <div class="topic-header">
+
+          <div class="topic-icon">
+            {{ topic.icon }}
+          </div>
+
+          <div class="topic-title">
+
+            <h3>
+              {{ topic.title }}
+            </h3>
+
+            <p>
+              {{ topic.short }}
+            </p>
+
+          </div>
+
+          <div class="arrow">
+
+            {{ selectedTopic === i ? '▲' : '▼' }}
+
+          </div>
+
+        </div>
+
+
+        <!-- DETAILS -->
+        <div
+          class="topic-details"
+          *ngIf="selectedTopic === i"
+        >
+
+          <div class="detail-box">
+
+            <h4>
+              ✅ What You Can Do
+            </h4>
+
+            <ul>
+
+              <li
+                *ngFor="let tip of topic.tips"
+              >
+                {{ tip }}
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <div class="report-box">
+
+            <h4>
+              🚨 What You Can Report
+            </h4>
+
+            <p>
+              {{ topic.report }}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- REPORT SECTION -->
+  <section class="report-section">
+
+    <div class="report-icon">
+      📢
+    </div>
+
+    <div class="report-content">
+
+      <h2>
+        See a Problem in Your Area?
+      </h2>
+
+      <p>
+        Don't ignore civic problems.
+        Report them through our complaint
+        system so the appropriate department
+        can take action.
+      </p>
+
+      <button
+        class="report-btn"
+        (click)="goToComplaint()"
+      >
+        📸 Report a Problem
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- DEPARTMENTS -->
+  <section class="departments">
+
+    <h2>
+      Problems You Can Report
+    </h2>
+
+
+    <div class="department-grid">
+
+      <div class="department-card">
+
+        <span>💧</span>
+
+        <h3>
+          Water
+        </h3>
+
+        <p>
+          Leaks, broken taps and water supply issues.
+        </p>
+
+      </div>
+
+
+      <div class="department-card">
+
+        <span>🚰</span>
+
+        <h3>
+          Drainage
+        </h3>
+
+        <p>
+          Blocked drains, overflow and sewage problems.
+        </p>
+
+      </div>
+
+
+      <div class="department-card">
+
+        <span>🗑️</span>
+
+        <h3>
+          Garbage
+        </h3>
+
+        <p>
+          Dumping, overflowing bins and waste accumulation.
+        </p>
+
+      </div>
+
+
+      <div class="department-card">
+
+        <span>💡</span>
+
+        <h3>
+          Streetlight & Road
+        </h3>
+
+        <p>
+          Broken lights, potholes and damaged roads.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FINAL MESSAGE -->
+  <section class="final-message">
+
+    <div class="heart">
+      ❤️
+    </div>
+
+    <h2>
+      Be the Change
+    </h2>
+
+    <p>
+      A cleaner community doesn't happen because
+      of one person. It happens when everyone
+      takes responsibility.
+    </p>
+
+    <strong>
+      Keep your community clean.
+      Report problems. Help others.
+    </strong>
+
+  </section>
+
+</div>

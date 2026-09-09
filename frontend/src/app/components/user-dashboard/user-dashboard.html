@@ -1,0 +1,257 @@
+<div class="dashboard">
+
+  <!-- ================= HEADER ================= -->
+
+  <div class="welcome-section">
+
+    <div class="welcome-content">
+
+      <div class="welcome-icon">
+        🏙️
+      </div>
+
+      <div>
+        <h1>Welcome to Social Welfare</h1>
+
+        <p>
+          Report public issues, track your complaints,
+          and help make your community better.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= MAIN ACTIONS ================= -->
+
+  <div class="section-title">
+    <h2>What would you like to do?</h2>
+    <p>Select an option below to continue</p>
+  </div>
+
+
+  <div class="action-grid">
+
+
+    <!-- MAKE COMPLAINT -->
+
+    <div
+      class="action-card complaint"
+      routerLink="/submit-complaint"
+    >
+
+      <div class="action-icon">
+        📝
+      </div>
+
+      <div class="action-content">
+
+        <h3>Make a Complaint</h3>
+
+        <p>
+          Report problems such as water leakage,
+          drainage issues, garbage, streetlights
+          or damaged roads.
+        </p>
+
+        <button type="button">
+          Report an Issue
+          <span>→</span>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- MY COMPLAINTS -->
+
+    <div
+      class="action-card history"
+      routerLink="/my-complaints"
+    >
+
+      <div class="action-icon">
+        📋
+      </div>
+
+      <div class="action-content">
+
+        <div class="title-row">
+
+          <h3>My Complaints</h3>
+
+          <span class="count-badge">
+            {{ complaints.length }}
+          </span>
+
+        </div>
+
+        <p>
+          View your submitted complaints and
+          track their current status and progress.
+        </p>
+
+        <button type="button">
+          View My Complaints
+          <span>→</span>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- AWARENESS -->
+
+    <div
+      class="action-card awareness"
+      routerLink="/awareness"
+    >
+
+      <div class="action-icon">
+        📢
+      </div>
+
+      <div class="action-content">
+
+        <h3>Community Awareness</h3>
+
+        <p>
+          Learn about cleanliness, public safety,
+          responsible citizenship and community welfare.
+        </p>
+
+        <button type="button">
+          Learn More
+          <span>→</span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= HOW IT WORKS ================= -->
+
+  <div class="how-section">
+
+    <div class="section-title">
+
+      <h2>How It Works</h2>
+
+      <p>
+        Reporting a public issue is simple
+      </p>
+
+    </div>
+
+
+    <div class="steps">
+
+
+      <!-- STEP 1 -->
+
+      <div class="step">
+
+        <div class="step-number">
+          1
+        </div>
+
+        <div class="step-icon">
+          📷
+        </div>
+
+        <h3>Report</h3>
+
+        <p>
+          Take a photo and describe the
+          public issue.
+        </p>
+
+      </div>
+
+
+      <div class="step-line"></div>
+
+
+      <!-- STEP 2 -->
+
+      <div class="step">
+
+        <div class="step-number">
+          2
+        </div>
+
+        <div class="step-icon">
+          🏢
+        </div>
+
+        <h3>Assignment</h3>
+
+        <p>
+          Your complaint is sent to the
+          appropriate department.
+        </p>
+
+      </div>
+
+
+      <div class="step-line"></div>
+
+
+      <!-- STEP 3 -->
+
+      <div class="step">
+
+        <div class="step-number">
+          3
+        </div>
+
+        <div class="step-icon">
+          🔎
+        </div>
+
+        <h3>Track</h3>
+
+        <p>
+          Track the progress of your complaint
+          anytime.
+        </p>
+
+      </div>
+
+
+      <div class="step-line"></div>
+
+
+      <!-- STEP 4 -->
+
+      <div class="step">
+
+        <div class="step-number">
+          4
+        </div>
+
+        <div class="step-icon">
+          ✅
+        </div>
+
+        <h3>Resolution</h3>
+
+        <p>
+          Receive the completed status when
+          the issue is resolved.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
