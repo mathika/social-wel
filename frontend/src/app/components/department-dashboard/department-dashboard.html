@@ -61,7 +61,7 @@
 
                 <img
                   *ngIf="complaint.imagePath"
-                  [src]="'https://social-wel.onrender.com/uploads/' + complaint.imagePath"
+                  [src]="complaint.imagePath"
                   class="complaint-image"
                   alt="Complaint Image"
                 >
@@ -167,7 +167,7 @@
               <!-- Resolved Image -->
               <img
                 *ngIf="complaint.resolvedImagePath"
-               [src]="'https://social-wel.onrender.com/uploads/' + complaint.resolvedImagePath"
+                [src]="complaint.resolvedImagePath"
                 class="resolved-image"
                 alt="Resolved Complaint"
               >
