@@ -1,19 +1,14 @@
 package com.socialwelfare.controller;
 
 import com.socialwelfare.entity.Complaint;
+import com.socialwelfare.service.CloudinaryService;
 import com.socialwelfare.service.ComplaintService;
-import com.socialwelfare.service.FileStorageService;
 
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -22,16 +17,15 @@ import java.util.List;
 public class ComplaintController {
 
     private final ComplaintService complaintService;
-    private final FileStorageService fileStorageService;
+    private final CloudinaryService cloudinaryService;
 
     public ComplaintController(
             ComplaintService complaintService,
-            FileStorageService fileStorageService) {
+            CloudinaryService cloudinaryService) {
 
         this.complaintService = complaintService;
-        this.fileStorageService = fileStorageService;
+        this.cloudinaryService = cloudinaryService;
     }
-
 
     // =========================================================
     // CREATE COMPLAINT
@@ -65,19 +59,19 @@ public class ComplaintController {
 
     ) throws IOException {
 
-        String imagePath = null;
+        String imageUrl = null;
 
+        // Upload complaint image to Cloudinary
         if (image != null && !image.isEmpty()) {
 
-            imagePath =
-                    fileStorageService.saveFile(image);
+            imageUrl =
+                    cloudinaryService.uploadImage(image);
         }
-
 
         Complaint complaint = new Complaint();
 
         complaint.setUserId(userId);
-        complaint.setImagePath(imagePath);
+        complaint.setImagePath(imageUrl);
         complaint.setDescription(description);
         complaint.setLatitude(latitude);
         complaint.setLongitude(longitude);
@@ -87,12 +81,8 @@ public class ComplaintController {
         complaint.setResolvedImagePath(null);
         complaint.setStatus("PENDING");
 
-
-        return complaintService.createComplaint(
-                complaint
-        );
+        return complaintService.createComplaint(complaint);
     }
-
 
     // =========================================================
     // GET ALL COMPLAINTS
@@ -103,7 +93,6 @@ public class ComplaintController {
 
         return complaintService.getAllComplaints();
     }
-
 
     // =========================================================
     // GET COMPLAINTS BY DEPARTMENT
@@ -117,7 +106,6 @@ public class ComplaintController {
                 .getComplaintsByDepartment(department);
     }
 
-
     // =========================================================
     // GET COMPLAINTS BY USER
     // =========================================================
@@ -129,7 +117,6 @@ public class ComplaintController {
         return complaintService
                 .getComplaintsByUser(userId);
     }
-
 
     // =========================================================
     // UPDATE STATUS
@@ -145,7 +132,6 @@ public class ComplaintController {
         return complaintService
                 .updateComplaintStatus(id, status);
     }
-
 
     // =========================================================
     // COMPLETE COMPLAINT + RESOLVED IMAGE
@@ -170,7 +156,6 @@ public class ComplaintController {
         );
     }
 
-
     // =========================================================
     // TEST CONTROLLER
     // =========================================================
@@ -179,85 +164,5 @@ public class ComplaintController {
     public String test() {
 
         return "Complaint Controller is working";
-    }
-
-
-    // =========================================================
-    // VIEW UPLOADED IMAGE
-    // =========================================================
-
-    @GetMapping("/image/{filename:.+}")
-    public ResponseEntity<Resource> getImage(
-            @PathVariable String filename) throws IOException {
-
-        Path uploadDirectory =
-                Paths.get("uploads").toAbsolutePath().normalize();
-
-        Path filePath =
-                uploadDirectory
-                        .resolve(filename)
-                        .normalize();
-
-        // Security check
-        if (!filePath.startsWith(uploadDirectory)) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        Resource resource =
-                new UrlResource(filePath.toUri());
-
-        if (!resource.exists() || !resource.isReadable()) {
-
-            return ResponseEntity.notFound().build();
-        }
-
-        String contentType =
-                getContentType(filename);
-
-        return ResponseEntity.ok()
-                .contentType(
-                        MediaType.parseMediaType(contentType)
-                )
-                .body(resource);
-    }
-
-
-    // =========================================================
-    // GET IMAGE CONTENT TYPE
-    // =========================================================
-
-    private String getContentType(String filename) {
-
-        int dotIndex = filename.lastIndexOf(".");
-
-        if (dotIndex == -1) {
-            return "application/octet-stream";
-        }
-
-        String extension =
-                filename.substring(dotIndex + 1)
-                        .toLowerCase();
-
-        switch (extension) {
-
-            case "png":
-                return "image/png";
-
-            case "jpg":
-            case "jpeg":
-                return "image/jpeg";
-
-            case "gif":
-                return "image/gif";
-
-            case "webp":
-                return "image/webp";
-
-            case "bmp":
-                return "image/bmp";
-
-            default:
-                return "application/octet-stream";
-        }
     }
 }
