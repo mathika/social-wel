@@ -1,16 +1,18 @@
 spring.application.name=social-welfare-backend
 
-spring.datasource.url=jdbc:mysql://localhost:3306/social_welfare
-spring.datasource.username=root
-spring.datasource.password=YOUR_DATABASE_PASSWORD
+spring.datasource.url=${SPRING_DATASOURCE_URL}
+spring.datasource.username=${SPRING_DATASOURCE_USERNAME}
+spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 
-gemini.api.key=YOUR_GEMINI_API_KEY
+gemini.api.key=${GEMINI_API_KEY}
 
 # Cloudinary
-cloudinary.cloud-name=zmjmvoey
+cloudinary.cloud-name=${CLOUDINARY_CLOUD_NAME}
+cloudinary.api-key=${CLOUDINARY_API_KEY}
+cloudinary.api-secret=${CLOUDINARY_API_SECRET}
 cloudinary.upload-preset=social_welfare_upload
